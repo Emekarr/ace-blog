@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/nav-style.css" />
+    <script src="https://use.fontawesome.com/36d660b0bd.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap"
+      rel="stylesheet"
+    />
+    <title>Login</title>
+</head>
+<body>
+    
+    <%- include("../partials/_header") %>
+
+    <main>
+      <%- include("../partials/_authfailedbanner") %>
+
+      <form action="/login" class="form" method="POST">
+      <h1>Login</h1>
+          <input type="text" name="username" placeholder="username" required autofocus>
+          <input type="password" name="password" placeholder="password" required autofocus>
+          <button type="submit">login</button>
+  
+          <a href="/signup">Don't have an account? Sign Up!</a>
+        </form>
+    </main>
+
+
+    
+    <script src="./js/script.js"></script>
+</body>
+</html>

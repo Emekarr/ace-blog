@@ -1,0 +1,15 @@
+.nav-open {
+    height: 15rem;
+}
+.nav-close {
+    height: 0rem;
+}
+.move-out{
+    right: -4rem;
+}
+.move-in{
+    right: 0rem;
+}
+.show-banner{
+    height: 10vh;
+}
