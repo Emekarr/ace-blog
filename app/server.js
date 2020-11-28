@@ -18,6 +18,14 @@ server.get("/", (req, res)=> {
     res.render("index")
 })
 
+server.get("/contact", (req, res) => {
+    res.render("contact")
+})
+
+server.post("/contact", (req, res) => {
+    res.send(req.body)
+})
+
 server.get("/login", (req, res) => {
     res.render("login")
 })
