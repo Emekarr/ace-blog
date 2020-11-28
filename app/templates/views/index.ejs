@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/index.css" />
     <link rel="stylesheet" href="./css/nav-style.css" />
     <script src="https://use.fontawesome.com/36d660b0bd.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -17,19 +18,22 @@
     <%- include("../partials/_header") %>
 
     <main>
-      <div class="article">
-        <h1 class="article-title">Something catchy should go in here</h1>
-        <h2 class="article-snippet">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat,
-          mollitia deleniti reprehenderit eius libero ab consequatur accusamus
-          beatae molestiae animi.
-        </h2>
-
-        <div class="bottom-items">
-          <h4 class="time-posted">14th of June 2021</h4>
-          <h4 class="reads">2,345 views</h4>
+      <% articles.forEach(article => { %>
+        <div class="article">
+          <div>
+          <h1 class="article-title"><%= article.title %></h1>
+          <h2 class="article-snippet">
+            <%= article.body  %>
+          </h2>
+          </div>
+  
+          <div class="bottom-items">
+            <h4 class="time-posted"><%= article.date %></h4>
+            <h4 class="reads"><%= article.views %></h4>
+          </div>
         </div>
-      </div>
+      <% }) %>
+      
     </main>
 
     <script src="./js/script.js"></script>

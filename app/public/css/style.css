@@ -71,56 +71,12 @@ main {
   flex-direction: column;
   align-items: center;
   height: 95vh;
+  scrollbar-width: none;
   margin-top: 5vh;
 }
-.form{
-  height: 30rem;
-  width: 65%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: rgb(245, 245, 245);
-  margin-top: 10rem;
-  padding: 2rem;
-  border-radius: 1rem;
-}
-.form > h1{
-  font-family: "Nerko One", cursive;
-  font-weight: 100;
-  font-size: 4rem;
-  margin-bottom: 2rem;
-}
-.form > input, .form > textarea {
-  padding: 1rem;
-  margin: 0.5rem;
-  width: 20rem;
-  border: none;
-  border-radius: 1rem;
-  outline: none;
-}
-.form > textarea {
-  height: 4rem;
-  font-family: Arial, Helvetica, sans-serif;
-}
-.form > button {
-  margin-top: 2rem;
-  border: none;
-  color: white;
-  background-color: teal;
-  border-radius: 1rem;
-  padding: 1rem 3rem;
-  outline: none;
-}
-.form > a {
-  text-decoration: none;
-  color: black;
-  cursor: default;
-  font-size: 1.1rem;
-  font-weight: 100;
-  margin-top: 3rem;
-}
 
-@media screen and (min-width: 1024px) {
+
+  @media screen and (min-width: 1024px) {
   header {
     flex-direction: row;
   }
@@ -157,31 +113,6 @@ main {
     height: 90vh;
     margin-top: 10vh;
   }
-
-  .form{
-    width: 40%;
-    height: 35rem;
-  }
-  .form > button {
-    padding: 0rem 5rem;
-    height: 5rem;
-  }
-  .form > button:hover {
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    background-color: rgb(2, 85, 85);
-  }
-  .form > input {
-    width: 24rem;
-    height: 3rem;
-  }
-  .form > textarea {
-    width: 24rem;
-    height: 6rem;
-  }
-  .form > a {
-    font-size: 1.2rem;
-  }
 }
 
 .auth-failed-banner{
@@ -201,14 +132,19 @@ main {
 }
 
 .article {
-  margin: 3rem 2rem 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 3rem;
+  width: 30rem;
   border-radius: 2rem;
-  padding: 1.5rem;
+  padding: 2rem;
   background-color: rgb(245, 245, 245);
 }
 .article-title {
   font-family: "Nerko One", cursive;
   font-size: 2rem;
+  font-weight: 300;
 }
 .article-snippet{
   font-size: 1.1rem;

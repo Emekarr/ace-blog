@@ -1,0 +1,53 @@
+.article {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 3rem;
+  width: 30rem;
+  border-radius: 2rem;
+  padding: 2rem;
+  background-color: rgb(245, 245, 245);
+}
+.article-title {
+  font-family: "Nerko One", cursive;
+  font-size: 2rem;
+  font-weight: 300;
+}
+.article-snippet {
+  font-size: 1.1rem;
+  font-weight: 100;
+  margin-top: 1rem;
+}
+.bottom-items {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin: 0.5rem 0rem 0.5rem 0rem;
+}
+.reads,
+.time-posted {
+  font-family: "Nerko One", cursive;
+  font-size: 0.9rem;
+  margin-top: 2rem;
+  font-weight: 100;
+}
+.reads {
+  color: teal;
+}
+
+@media screen and (min-width: 1024px) {
+  .article {
+    height: 40rem;
+    width: 70% !important;
+  }
+  .article-title {
+    font-size: 4.5rem !important;
+  }
+  .article-snippet {
+    font-size: 2.4rem !important;
+  }
+  .reads,
+  .time-posted {
+    font-size: 1.8rem !important;
+  }
+}
