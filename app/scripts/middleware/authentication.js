@@ -1,8 +1,17 @@
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 
 const authmiddleware = (req, res, next) => {
-    const cookies = req.cookies
-    console.log(cookies)
-}
+  const cookies = req.cookies;
+  const token = cookies.token;
 
-module.exports = authmiddleware
+  try {
+    if (token) {
+        const tokenData = jwt.verify(token, "supersecretkey")
+        const userId = tokenData.id
+    } else {
+      new Error()
+    }
+  } catch (e) {}
+};
+
+module.exports = authmiddleware;

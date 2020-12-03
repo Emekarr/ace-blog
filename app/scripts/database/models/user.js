@@ -21,18 +21,19 @@ const userSchema = mongoose.Schema(
     },
     tokens: [
       {
-        type: String,
-        required: true,
+        token: {
+          type: String,
+          required: true,
+        },
       },
     ],
-  },
-  { timestamps: true }
+  }
 );
 
 //generate jwt token when called
 userSchema.methods.generateToken = async function () {
   const token = await jwt.sign({ id: this._id }, "supersecretkey");
-  this.tokens.push(token);
+  this.tokens.push({token});
   await this.save();
   return token;
 };
