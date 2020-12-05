@@ -7,10 +7,14 @@ const { createUser, logInUser } = require("./scripts/database/databasescripts");
 const cookieParser = require("cookie-parser");
 //authentication middleware
 const authMiddleware = require("./scripts/middleware/authentication");
+//authentication middleware for admin
+const adminMiddleWare = require("./scripts/middleware/adminpanelauth");
 // jsonwebtokem
 const jwt = require("jsonwebtoken");
 // user model
 const User = require("./scripts/database/models/user");
+//send grid
+const sg = require("@sendgrid/mail");
 
 //connect to a database
 mongoose.connect("mongodb://127.0.0.1/ace-blog-database", {
@@ -38,7 +42,7 @@ server.get("/", (req, res) => {
   res.render("index");
 });
 
-server.get("/admin", (req, res) => {
+server.get("/admin", adminMiddleWare, (req, res) => {
   res.render("admin");
 });
 
@@ -46,11 +50,12 @@ server.post("/admin", (req, res) => {
   res.send(req.body);
 });
 
-server.get("/contact", authMiddleware, (req, res) => {
+server.get("/contact", (req, res) => {
   res.render("contact");
 });
 
 server.post("/contact", (req, res) => {
+
   res.send(req.body);
 });
 
@@ -98,6 +103,25 @@ server.post("/signup", async (req, res) => {
   } else {
     res.render("authresult", { result: "failed!", method: "registration " });
   }
+});
+
+server.get("/logout", async (req, res) => {
+  const cookies = req.cookies;
+  const cookieToken = cookies.token;
+
+  const tokenData = jwt.verify(cookieToken, "supersecretkey");
+  const userId = tokenData.id;
+  const user = await User.findOne({
+    _id: userId,
+    "tokens.token": cookieToken,
+  });
+
+  user.tokens.forEach((token) => {
+    if (token.token === cookieToken) delete token.token;
+  });
+
+  res.clearCookie("token");
+  res.render("index");
 });
 
 server.get("*", (req, res) => {

@@ -4,6 +4,7 @@ const navMenu = document.querySelector("nav");
 //form submit button
 const submitButton = document.querySelector(".form > button");
 
+
 const navBarController = (moveIn, moveOut, action1, action2) => {
   hamburgerButton.classList.remove(moveIn);
   closeMenuButton.classList.remove(moveOut);
@@ -21,25 +22,23 @@ if (submitButton){
     const passwordField2 = formFields[2];
   
     if (passwordField1.value !== passwordField2.value) {
-      event.preventDefault();
-      const authFailedBanner = document.querySelector(".auth-failed-banner");
-      authFailedBanner.firstElementChild.innerHTML =
-        "Make sure your passwords match!";
-      authFailedBanner.classList.add("show-banner");
+      formMonitor(event, "Make sure your passwords match!")
     } else if (passwordField1.value.length < 5) {
-      event.preventDefault();
-      const authFailedBanner = document.querySelector(".auth-failed-banner");
-      authFailedBanner.firstElementChild.innerHTML =
-        "Make sure your password is more than 4 digits";
-      authFailedBanner.classList.add("show-banner");
+      formMonitor(event, "Make sure your password is more than 4 digits")
     } else if (usernameField.value.includes(" ")) {
-      event.preventDefault();
+      formMonitor(event, "Username must not contain any white spaces!")
+    }
+  });
+}
+
+const formMonitor = (event, message)=> {
+  event.preventDefault();
       const authFailedBanner = document.querySelector(".auth-failed-banner");
       authFailedBanner.firstElementChild.innerHTML =
         "Username must not contain any white spaces!";
       authFailedBanner.classList.add("show-banner");
-    }
-  });
+      authFailedBanner.firstElementChild.innerHTML = message
+      authFailedBanner.classList.add("show-banner");
 }
 
 hamburgerButton.addEventListener("click", () => {
@@ -49,3 +48,8 @@ hamburgerButton.addEventListener("click", () => {
 closeMenuButton.addEventListener("click", () => {
   navBarController("move-out", "move-in", "nav-close", "nav-open");
 });
+
+
+//get all cookies to check if user is signed in
+const cookies = document.cookie
+console.log(cookies)
