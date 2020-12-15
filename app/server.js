@@ -39,12 +39,10 @@ server.set("views", viewsLocation);
 server.use(express.static(staticFilesLocation));
 
 server.get("/", (req, res) => {
-  res.cookie("loggedIn", true);
   res.render("index");
 });
 
 server.get("/admin", adminMiddleWare, (req, res) => {
-  console.log(req.body.cookies);
   res.render("admin");
 });
 
@@ -68,10 +66,7 @@ server.post("/login", async (req, res) => {
   const cookies = req.cookies;
   const cookieToken = cookies.token;
 
-  console.log(cookieToken);
-
   const token = await logInUser(req.body);
-  console.log(token)
   if (token) {
     res.cookie("token", token, { httpOnly: true });
     res.cookie("loggedIn", true);
@@ -117,8 +112,8 @@ server.get("/logout", async (req, res) => {
   });
 
   res.clearCookie("token");
-  res.cookie("loggedIn", false);
-  res.render("index");
+  res.clearCookie("loggedIn");
+  res.redirect("/");
 });
 
 server.get("*", (req, res) => {

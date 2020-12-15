@@ -21,11 +21,11 @@ const getCookie = (cname) => {
 };
 
 if (getCookie("loggedIn")) {
-  const logOut = document.querySelector(".logout");
-  logOut.style.display = "none"
-} else {
   const logIn = document.querySelector(".login");
   logIn.style.display = "none"
+} else {
+  const logOut = document.querySelector(".logout");
+  logOut.style.display = "none"
 }
 
 const navBarController = (moveIn, moveOut, action1, action2) => {
