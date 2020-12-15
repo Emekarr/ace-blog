@@ -39,10 +39,12 @@ server.set("views", viewsLocation);
 server.use(express.static(staticFilesLocation));
 
 server.get("/", (req, res) => {
+  res.cookie("loggedIn", true);
   res.render("index");
 });
 
 server.get("/admin", adminMiddleWare, (req, res) => {
+  console.log(req.body.cookies);
   res.render("admin");
 });
 
@@ -55,7 +57,6 @@ server.get("/contact", (req, res) => {
 });
 
 server.post("/contact", (req, res) => {
-
   res.send(req.body);
 });
 
@@ -67,22 +68,16 @@ server.post("/login", async (req, res) => {
   const cookies = req.cookies;
   const cookieToken = cookies.token;
 
-  if (cookieToken) {
-    const tokenData = jwt.verify(cookieToken, "supersecretkey");
-    const userId = tokenData.id;
-    const user = await User.findOne({
-      _id: userId,
-      "tokens.token": cookieToken,
-    });
-    if (user) return res.redirect("/");
-  }
+  console.log(cookieToken);
 
   const token = await logInUser(req.body);
-
+  console.log(token)
   if (token) {
     res.cookie("token", token, { httpOnly: true });
+    res.cookie("loggedIn", true);
+    res.redirect("/");
   } else {
-    res.render("authresult", { result: "failed", method: "Login" });
+    res.render("authresult", { result: " failed", method: "Login" });
   }
 });
 
@@ -96,6 +91,7 @@ server.post("/signup", async (req, res) => {
 
   if (token) {
     res.cookie("token", token, { httpOnly: true });
+    res.cookie("loggedIn", true);
     res.render("authresult", {
       result: "was successful!",
       method: "registration ",
@@ -121,6 +117,7 @@ server.get("/logout", async (req, res) => {
   });
 
   res.clearCookie("token");
+  res.cookie("loggedIn", false);
   res.render("index");
 });
 

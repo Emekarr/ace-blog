@@ -4,6 +4,7 @@ const User = require("../database/models/user");
 const adminAuth = (req, res, next) => {
   const cookies = req.cookies;
   const token = cookies.token;
+  console.log(token)
 
   try {
     if (!token) throw new Error();
@@ -12,10 +13,9 @@ const adminAuth = (req, res, next) => {
     const user = User.findOne({ _id: id, "tokens.token": token });
     if (user === null) throw new Error();
     if (user.isAdmin === true){
-      console.log("passed")
+      console.log(user.isAdmin)
       next()
     }else{
-      
       throw new Error()
     };
   } catch (e) {
