@@ -2,7 +2,12 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 // these functions perform database operations
-const { createUser, logInUser } = require("./scripts/database/databasescripts");
+const {
+  createUser,
+  logInUser,
+  createPost,
+  getPost,
+} = require("./scripts/database/databasescripts");
 // helps us use cookies
 const cookieParser = require("cookie-parser");
 //authentication middleware
@@ -38,7 +43,10 @@ server.set("views", viewsLocation);
 
 server.use(express.static(staticFilesLocation));
 
-server.get("/", (req, res) => {
+server.get("/", async (req, res) => {
+  const paginateData = {limit: 3, page: 1}
+const results = await getPost(paginateData)
+console.log(results)
   res.render("index");
 });
 
@@ -46,8 +54,15 @@ server.get("/admin", adminMiddleWare, (req, res) => {
   res.render("admin");
 });
 
-server.post("/admin", (req, res) => {
-  res.send(req.body);
+server.post("/admin", adminMiddleWare, async (req, res) => {
+  const postData = req.body;
+  const isSaved = await createPost(postData);
+
+  if (isSaved) {
+    res.render("authresult", { result: " succeeded", method: "Post creation" });
+  } else {
+    res.render("authresult", { result: " failed", method: "Post creation" });
+  }
 });
 
 server.get("/contact", (req, res) => {

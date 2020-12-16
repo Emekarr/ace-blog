@@ -15,7 +15,6 @@ const postSchema = mongoose.Schema({
     views: {
         type: String,
         trim: true,
-        required: true
     },
     owner: {
         type: mongoose.Schema.Types.ObjectId,

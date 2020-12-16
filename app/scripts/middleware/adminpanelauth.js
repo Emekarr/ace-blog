@@ -1,19 +1,18 @@
 const jwt = require("jsonwebtoken");
 const User = require("../database/models/user");
 
-const adminAuth = (req, res, next) => {
+const adminAuth = async (req, res, next) => {
   const cookies = req.cookies;
   const token = cookies.token;
-  console.log(token)
 
   try {
     if (!token) throw new Error();
     const tokenData = jwt.verify(token, "supersecretkey");
     const id = tokenData.id;
-    const user = User.findOne({ _id: id, "tokens.token": token });
+    const user = await User.findOne({ _id: id, "tokens.token": token });
     if (user === null) throw new Error();
     if (user.isAdmin === true){
-      console.log(user.isAdmin)
+      req.body.owner = user._id
       next()
     }else{
       throw new Error()
@@ -21,8 +20,6 @@ const adminAuth = (req, res, next) => {
   } catch (e) {
     res.render("authresult", {method:"access to this page", result:" is denied"});
   }
-
-  
 };
 
 module.exports = adminAuth;
