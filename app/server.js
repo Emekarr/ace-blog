@@ -44,10 +44,11 @@ server.set("views", viewsLocation);
 server.use(express.static(staticFilesLocation));
 
 server.get("/", async (req, res) => {
-  const paginateData = {limit: 3, page: 1}
-const results = await getPost(paginateData)
-console.log(results)
-  res.render("index");
+  const paginateData = { limit: req.body.limit, page: req.body.page };
+  const results = await getPost(paginateData);
+  
+
+  res.render("index", {results});
 });
 
 server.get("/admin", adminMiddleWare, (req, res) => {
