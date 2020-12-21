@@ -13,7 +13,7 @@ const postSchema = mongoose.Schema({
         trim: true
     },
     views: {
-        type: String,
+        type: Number,
         trim: true,
     },
     owner: {
@@ -24,6 +24,17 @@ const postSchema = mongoose.Schema({
 }, {
     timestamps: true
 })
+
+postSchema.methods.toJSON = function() {
+    const postObject = this.toObject()
+    delete postObject.tokens
+    delete postObject.updatedAt
+    delete postObject.owner
+    delete postObject._v
+    delete postObject._id
+    
+    return postObject
+}
 
 const Post = mongoose.model("Post", postSchema)
 

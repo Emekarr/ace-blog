@@ -18,10 +18,23 @@
     <%- include("../partials/_header") %>
 
     <main>
-    
+  
       
+        <% results.forEach(result => { %>
+          <div class="article">
+          <h1 class="article-title"><%= result.title %></h1>
+          <h2 class="article-snippet">
+            <%= result.body %>
+          </h2>
+          <div class="bottom-items">
+            <h4 class="time-posted"><%= result.createdAt %></h4>
+            <h4 class="reads"><%= result.views %></h4>
+          </div>
+        </div>
+        <% }) %>
     </main>
 
     <script src="./js/script.js"></script>
+    <script src="./js/article.js"></script>
   </body>
 </html>

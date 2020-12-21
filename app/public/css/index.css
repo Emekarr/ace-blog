@@ -4,6 +4,7 @@
   justify-content: space-between;
   margin-top: 3rem;
   width: 30rem;
+  height: 15rem;
   border-radius: 2rem;
   padding: 2rem;
   background-color: rgb(245, 245, 245);
@@ -14,13 +15,19 @@
   font-weight: 300;
 }
 .article-snippet {
-  font-size: 1.1rem;
+  font-size: 0.8rem;
   font-weight: 100;
   margin-top: 1rem;
+  width: 100%;
+  height: 15.5rem;
+  white-space: pre-line;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .bottom-items {
   display: flex;
-  width: 100%;
+  align-self: center;
+  width: 70%;
   justify-content: space-between;
   margin: 0.5rem 0rem 0.5rem 0rem;
 }
@@ -37,17 +44,17 @@
 
 @media screen and (min-width: 1024px) {
   .article {
-    height: 40rem;
-    width: 70% !important;
+    height: 30rem;
+    width: 70%;
   }
   .article-title {
-    font-size: 4.5rem !important;
+    font-size: 4rem;
   }
   .article-snippet {
-    font-size: 2.4rem !important;
+    font-size: 1.7rem !important;
   }
   .reads,
   .time-posted {
-    font-size: 1.8rem !important;
+    font-size: 1.3rem !important;
   }
 }

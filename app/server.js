@@ -7,6 +7,7 @@ const {
   logInUser,
   createPost,
   getPost,
+  getAPost
 } = require("./scripts/database/databasescripts");
 // helps us use cookies
 const cookieParser = require("cookie-parser");
@@ -44,11 +45,17 @@ server.set("views", viewsLocation);
 server.use(express.static(staticFilesLocation));
 
 server.get("/", async (req, res) => {
-  const paginateData = {limit: 3, page: 1}
+  const paginateData = {limit: req.body.limit, page: req.body.page}
 const results = await getPost(paginateData)
-console.log(results)
-  res.render("index");
+  res.render("index", {results});
 });
+
+server.get("/post", async (req, res) => {
+  const post = await getAPost(req.query.title)
+  
+  console.log(JSON.stringify(post))
+  res.send(post)
+})
 
 server.get("/admin", adminMiddleWare, (req, res) => {
   res.render("admin");
@@ -73,14 +80,19 @@ server.post("/contact", (req, res) => {
   res.send(req.body);
 });
 
+server.get("/updates", (req, res) => {
+  res.render("authresult", { result: " failed because this page is undone.", method: " attempt to get this page has" });
+})
+
+server.get("/about", (req, res) => {
+  res.render("authresult", { result: " failed because this page is undone.", method: " attempt to get this page has" });
+})
+
 server.get("/login", (req, res) => {
   res.render("login");
 });
 
 server.post("/login", async (req, res) => {
-  const cookies = req.cookies;
-  const cookieToken = cookies.token;
-
   const token = await logInUser(req.body);
   if (token) {
     res.cookie("token", token, { httpOnly: true });

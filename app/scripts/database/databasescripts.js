@@ -40,17 +40,40 @@ const createPost = async (postData) => {
   return saved;
 };
 
-const getPost = async (data) => {
+const getPost = async ({ limit, page }) => {
   let results;
   
   try {
-    if (!data.limit || !data.page) throw new Error()
-    const page = data.page;
-    const startFrom = (page - 1) * data.limit;
-    results = Post.find().limit(data.limit).skip(startFrom);
+    if (!limit || !page) {
+      limit = 7;
+      page = 1;
+    }
+    const startFrom = (page - 1) * limit;
+    results = await Post.find().limit(limit).skip(startFrom);
+    
+    delete results[0].views
+
+    console.log(results[0].views)
+    
   } catch (e) {}
 
   return results;
+};
+
+const getAPost = async (title) => {
+  let post;
+  try {
+    post = await Post.findOne({ title });
+    if (!post) throw new Error();
+    if (!post.views) {
+      post.views = 1;
+    } else {
+      post.views += 1;
+    }
+    await post.save();
+  } catch (e) {}
+
+  return post;
 };
 
 module.exports = {
@@ -58,4 +81,5 @@ module.exports = {
   logInUser,
   createPost,
   getPost,
+  getAPost,
 };
