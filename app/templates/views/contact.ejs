@@ -1,38 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/formpage.css" />
     <link rel="stylesheet" href="./css/nav-style.css" />
     <script src="https://use.fontawesome.com/36d660b0bd.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap"
-      rel="stylesheet"
-    />
-    <title>Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet" />
+    <title>Conact Us</title>
 </head>
+
 <body>
-    
     <%- include("../partials/_header") %>
 
-    <main>
-      <%- include("../partials/_authfailedbanner") %>
+        <main class="main-form">
+            <div class="container">
+                <%- include("../partials/_authfailedbanner") %>
 
-      <form action="/contact" class="form" method="POST">
-      <h1>Contact us</h1>
-          <input type="text" name="username" placeholder="username" required autofocus>
-          <input type="email" name="email" placeholder="email" required autofocus>
-          <textarea type="text" name="message" placeholder="message" required autofocus></textarea>
-          <button type="submit">send</button>
-  
-        </form>
-    </main>
+                    <form action="/contact" method="POST">
+                        <div class="form">
+                            <h1>Contact us</h1>
+                            <div class="text">
+                                <input type="text" name="username" placeholder="username" required autofocus />
+                                <input type="email" name="email" placeholder="email" required autofocus />
+                            </div>
+                            <textarea type="text" name="message" placeholder="message" required autofocus></textarea>
+                            <button type="submit" class="btn">send</button>
+                        </div>
+                    </form>
+            </div>
+        </main>
 
-
-    
-    <script src="./js/script.js"></script>
+        <script src="./js/script.js"></script>
 </body>
+
 </html>

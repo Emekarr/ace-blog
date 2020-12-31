@@ -1,60 +1,85 @@
-.article {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-top: 3rem;
-  width: 30rem;
-  height: 15rem;
-  border-radius: 2rem;
-  padding: 2rem;
-  background-color: rgb(245, 245, 245);
-}
-.article-title {
-  font-family: "Nerko One", cursive;
-  font-size: 2rem;
-  font-weight: 300;
-}
-.article-snippet {
-  font-size: 0.8rem;
-  font-weight: 100;
-  margin-top: 1rem;
-  width: 100%;
-  height: 15.5rem;
-  white-space: pre-line;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.bottom-items {
-  display: flex;
-  align-self: center;
-  width: 70%;
-  justify-content: space-between;
-  margin: 0.5rem 0rem 0.5rem 0rem;
-}
-.reads,
-.time-posted {
-  font-family: "Nerko One", cursive;
-  font-size: 0.9rem;
-  margin-top: 2rem;
-  font-weight: 100;
-}
-.reads {
-  color: teal;
+.container-index {
+    width: 90%;
+    margin: auto;
 }
 
-@media screen and (min-width: 1024px) {
-  .article {
-    height: 30rem;
-    width: 70%;
-  }
-  .article-title {
-    font-size: 4rem;
-  }
-  .article-snippet {
-    font-size: 1.7rem !important;
-  }
-  .reads,
-  .time-posted {
-    font-size: 1.3rem !important;
-  }
+.main-index {
+    margin-top: 5rem;
+}
+
+.article {
+    margin: 1.5rem 0;
+    border-radius: 5px;
+    height: auto;
+    padding: 2rem;
+    background-color: var(--light-grayish-blue);
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.article-title {
+    font-family: 'Nerko One', cursive;
+    font-weight: 300;
+}
+
+.article-snippet {
+    height: 100px;
+    overflow: hidden;
+    font-size: 0.8rem;
+    font-weight: 100;
+    margin: 1.5rem auto;
+    width: 100%;
+    line-height: 1.5;
+    text-align: justify;
+}
+
+.bottom-items {
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+    margin: 0.5rem 0rem 0.5rem 0rem;
+}
+
+.reads,
+.time-posted {
+    font-family: 'Nerko One', cursive;
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    font-weight: 100;
+}
+
+.reads {
+    color: var(--line-green);
+}
+
+.arr {
+    padding: 0.5rem 0.6rem;
+    border-radius: 50%;
+}
+
+@media screen and (min-width: 600px) {
+    .article-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 1rem;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .container-index {
+        width: 80%;
+        margin: auto;
+    }
+    .article-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 1rem;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .container-index {
+        width: 1200px;
+        margin: auto;
+    }
 }

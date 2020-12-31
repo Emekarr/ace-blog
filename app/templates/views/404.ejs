@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/nav-style.css" />
     <script src="https://use.fontawesome.com/36d660b0bd.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet" />
     <title>Page not found</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <%- include("../partials/_header") %>
 
-    <main>
-      <h1 style="font-size: 20rem;">404</h1>
-      <h2 style="font-size: 2rem;"><%= url + " is not a valid path!" %></h2>
-    </main>
+        <main class="main err">
+            <h1>4<span class="zero">0</span>4</h1>
+            <h2>
+                <%= url + " is not a valid path!" %>
+            </h2>
+        </main>
 
-    <script src="./js/script.js"></script>
-  </body>
+        <script src="./js/script.js"></script>
+</body>
+
 </html>

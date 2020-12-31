@@ -1,74 +1,52 @@
-.form {
-  height: 30rem;
-  width: 65%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: rgb(245, 245, 245);
-  margin-top: 10rem;
-  padding: 2rem;
-  border-radius: 1rem;
-}
-.form > h1 {
-  font-family: "Nerko One", cursive;
-  font-weight: 100;
-  font-size: 4rem;
-  margin-bottom: 2rem;
-}
-.form > input,
-.form > textarea {
-  padding: 1rem;
-  margin: 0.5rem;
-  width: 20rem;
-  border: none;
-  border-radius: 1rem;
-  outline: none;
-}
-.form > textarea {
-  height: 4rem;
-  font-family: Arial, Helvetica, sans-serif;
-}
-.form > button {
-  margin-top: 2rem;
-  border: none;
-  color: white;
-  background-color: teal;
-  border-radius: 1rem;
-  padding: 1rem 3rem;
-  outline: none;
-}
-.form > a {
-  text-decoration: none;
-  color: black;
-  cursor: default;
-  font-size: 1.1rem;
-  font-weight: 100;
-  margin-top: 3rem;
+.main-form {
+    margin-top: 4rem;
 }
 
-@media screen and (min-width: 1024px) {
-  .form {
-    width: 40%;
-    height: 35rem;
-  }
-  .form > button {
-    padding: 0rem 5rem;
-    height: 5rem;
-  }
-  .form > button:hover {
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    background-color: rgb(2, 85, 85);
-  }
-  .form > input {
-    width: 24rem;
-    height: 3rem;
-  }
-  .form > textarea {
-    width: 24rem;
-    height: 6rem;
-  }
-  .form > a {
-    font-size: 1.2rem;
-  }
+.form {
+    text-align: center;
+    background-color: var(--white);
+    margin: 3rem 0.1rem;
+    padding: 2rem;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.form h1 {
+    font-family: 'Nerko One', cursive;
+    font-weight: 100;
+    margin-bottom: 1.5rem;
+    color: var(--dark-blue);
+}
+
+.form input,
+.form textarea {
+    padding: 1rem 0;
+    margin: 0.8rem auto;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-transform: capitalize;
+    border-bottom: 1px solid var(--dark-blue);
+}
+
+.form textarea {
+    height: 4rem;
+}
+
+@media screen and (min-width: 700px) {
+    .text {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    input:first-child {
+        margin-right: 1rem;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .main-form {
+        margin-top: 4rem;
+    }
 }

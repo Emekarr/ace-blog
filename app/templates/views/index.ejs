@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/style.css" />
@@ -8,33 +9,37 @@
     <link rel="stylesheet" href="./css/nav-style.css" />
     <script src="https://use.fontawesome.com/36d660b0bd.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet" />
     <title>Ace Blog</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <%- include("../partials/_header") %>
 
-    <main>
-  
-      
-        <% results.forEach(result => { %>
-          <div class="article">
-          <h1 class="article-title"><%= result.title %></h1>
-          <h2 class="article-snippet">
-            <%= result.body %>
-          </h2>
-          <div class="bottom-items">
-            <h4 class="time-posted"><%= result.createdAt %></h4>
-            <h4 class="reads"><%= result.views %></h4>
-          </div>
-        </div>
-        <% }) %>
-    </main>
+        <main class="main-index">
+            <div class="container-index">
+                <div class="article-grid">
+                    <% results.forEach(result => { %>
+                        <div class="article">
+                            <h1 class="article-title">
+                                <%= result.title %>
+                            </h1>
+                            <p class="article-snippet">
+                                <%= result.body %>
+                            </p>
+                            <button class="btn arr">&DownArrow;</button>
+                            <div class="bottom-items">
+                                <small class="time-posted"> <%= result.createdAt %> </small>
+                                <small class="reads"> <%= result.views %> </small>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+            </div>
+        </main>
 
-    <script src="./js/script.js"></script>
-    <script src="./js/article.js"></script>
-  </body>
+        <script src="./js/script.js"></script>
+        <script src="./js/article.js"></script>
+</body>
+
 </html>
