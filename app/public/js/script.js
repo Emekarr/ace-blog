@@ -1,13 +1,3 @@
-// Read More
-const arr = document.querySelectorAll('.arr');
-const articleSnippet = document.querySelectorAll('.article-snippet');
-arr.forEach((arr) => {
-    arr.addEventListener('click', () => {
-        articleSnippet.forEach((article) => {
-            article.style.height = 'auto';
-        });
-    });
-});
 // Nav Toggle
 const toggle = document.querySelector('.toggle');
 const nav = document.querySelector('.sideNav');

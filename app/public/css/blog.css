@@ -1,0 +1,160 @@
+.blog-container {
+    width: 90%;
+    overflow: hidden;
+    margin: auto;
+}
+
+.blog {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    background: rgb(211, 210, 210);
+}
+
+.main-blog {
+    text-align: center;
+}
+
+.blog-form {
+    padding: 3rem 1rem;
+}
+
+.blog-form h2 {
+    margin: 0 0 2rem;
+    font-family: 'Nerko One', cursive;
+    color: var(--dark-blue);
+}
+
+.blog-form p {
+    margin: 0 0 2rem;
+    font-size: 0.8rem;
+    font-weight: 100;
+    margin: 1.5rem auto;
+    width: 100%;
+    line-height: 1.5;
+    text-align: justify;
+}
+
+.details {
+    display: flex;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.det {
+    padding: 0.2rem 0.3rem;
+    border-radius: 5px;
+    border: solid 1px var(--dark-blue);
+    cursor: pointer;
+    transition: background 0.5s ease;
+}
+
+.details p {
+    margin: 0;
+    padding: 0;
+}
+
+.det:first-child {
+    margin-right: 0.5rem;
+}
+
+.det:hover {
+    background: var(--dark-blue);
+    color: var(--grayish-blue);
+}
+
+.main-blog-form {
+    margin-top: 0rem;
+    text-align: center;
+}
+
+.blog-form {
+    text-align: center;
+    background-color: var(--white);
+    margin: 1rem 0.1rem 2rem;
+    padding: 2rem;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    font-family: 'Nerko One', cursive;
+    font-weight: 100;
+    margin-bottom: 1.5rem;
+    color: var(--dark-blue);
+}
+
+.blog-form input,
+.blog-form textarea {
+    padding: 1rem 0;
+    margin: 0.8rem auto;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-transform: capitalize;
+    border-bottom: 1px solid var(--dark-blue);
+}
+
+.blog-form textarea {
+    height: 4rem;
+}
+
+.re {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.re h4 {
+    color: var(--dark-blue);
+    margin-bottom: 0.2rem;
+}
+
+.re p,
+.re small {
+    font-size: 0.8rem;
+    color: var(--grayish-blue);
+    cursor: pointer;
+}
+
+.re p:hover {
+    opacity: 0.8;
+}
+
+.re-name {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.reply p {
+    font-weight: bolder;
+    text-transform: uppercase;
+    color: var(--dark-blue);
+}
+
+hr {
+    margin: 1rem auto;
+    border: 0.01rem solid var(--grayish-blue);
+}
+
+@media screen and (min-width: 1000px) {
+    .blog-container {
+        width: 70%;
+    }
+    .comment-container {
+        width: 60%;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .blog-container {
+        width: 800px;
+    }
+    .comment-container {
+        width: 700px;
+    }
+}
