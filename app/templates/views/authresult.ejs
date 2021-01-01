@@ -1,26 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/nav-style.css" />
     <script src="https://use.fontawesome.com/36d660b0bd.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet" />
     <title>Sign up</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <%- include("../partials/_header") %>
 
-    <main>
-      <h2 style="font-size: 5rem;"> <%= `Your ` + method + result %> </h2>
-      <button onclick="location.href='/'" style="background-color: teal; color: white; padding: 2rem; border: 0rem; margin-top: 3rem; outline: none; cursor: pointer;">Go back to home</button>
-    </main>
+        <main>
+            <div class="container">
+                <h2 style="font-size: 5rem">
+                    <%= `Your ` + method + result %>
+                </h2>
+                <button class="btn" onclick="location.href='/'" style="
+            background-color: teal;
+            color: white;
+            padding: 2rem;
+            border: 0rem;
+            margin-top: 3rem;
+            outline: none;
+            cursor: pointer;
+          ">
+          Go back to home
+        </button>
+            </div>
+        </main>
 
-    <script src="./js/script.js"></script>
-  </body>
+        <script src="./js/script.js"></script>
+</body>
+
 </html>

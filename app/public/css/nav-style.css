@@ -1,15 +1,19 @@
 .nav-open {
     height: 17rem;
 }
+
 .nav-close {
     height: 0rem;
 }
-.move-out{
+
+.move-out {
     right: -4rem;
 }
-.move-in{
+
+.move-in {
     right: 0rem;
 }
-.show-banner{
+
+.show-banner {
     height: 10vh;
 }
