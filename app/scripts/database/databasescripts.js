@@ -32,6 +32,7 @@ const logInUser = async ({ username, password }) => {
 const createPost = async (postData) => {
   let saved;
   try {
+    console.log(postData.author)
     const post = new Post(postData);
     await post.save();
     saved = true;

@@ -52,9 +52,7 @@ server.get('/', async(req, res) => {
 
 server.get('/post', async(req, res) => {
     const post = await getAPost(req.query.title);
-
-    console.log(JSON.stringify(post));
-    res.send(post);
+    res.render("blog", {post});
 });
 
 server.get('/admin', adminMiddleWare, (req, res) => {
@@ -70,6 +68,11 @@ server.post('/admin', adminMiddleWare, async(req, res) => {
     } else {
         res.render('authresult', { result: ' failed', method: 'Post creation' });
     }
+});
+
+
+server.get('/about', (req, res) => {
+    res.render('about');
 });
 
 server.get('/contact', (req, res) => {

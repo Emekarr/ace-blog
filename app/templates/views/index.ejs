@@ -18,7 +18,6 @@
 
         <main class="main-index">
             <div class="container-index">
-                <a href="/blog">
                     <div class="article-grid">
                         <% results.forEach(result => { %>
                             <div class="article">
@@ -29,13 +28,12 @@
                                     <%= result.body %>
                                 </p>
                                 <div class="bottom-items">
-                                    <small class="time-posted"> <%= result.createdAt %> </small>
-                                    <small class="reads"> <%= result.views %> </small>
+                                    <small class="time-posted"> <%= result.createdAt.toString().slice(4, 16) %> </small>
+                                    <small class="reads"> <%= result.views + " reads" %> </small>
                                 </div>
                             </div>
                             <% }) %>
                     </div>
-                </a>
             </div>
         </main>
 
