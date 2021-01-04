@@ -19,8 +19,6 @@
 
 .article:hover {
     cursor: pointer;
-    transform: scale(1.03);
-    transition: all 0.6s ease-in-out;
 }
 
 .article-title {

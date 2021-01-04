@@ -33,7 +33,11 @@
               <p><%= post.author %></p>
             </div>
             <div class="det">
-              <p><%= post.createdAt.toString().slice(4, 16) %></p>
+                
+                <% var createdAt = post.createdAt.toString().slice(4, 16) %>
+                                    
+                <small class="time-posted"> <%= createdAt.substring(0, 6) + "," + createdAt.substring(6, createdAt.length)  %>  </small>
+                
             </div>
           </div>
         </div>

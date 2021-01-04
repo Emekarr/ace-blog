@@ -28,8 +28,16 @@
                                     <%= result.body %>
                                 </p>
                                 <div class="bottom-items">
-                                    <small class="time-posted"> <%= result.createdAt.toString().slice(4, 16) %> </small>
-                                    <small class="reads"> <%= result.views + " reads" %> </small>
+                                    <% var createdAt = result.createdAt.toString().slice(4, 16) %>
+                                    
+                                    <small class="time-posted"> <%= createdAt.substring(0, 6) + "," + createdAt.substring(6, createdAt.length)  %>  </small>
+                                    
+                                    <% if(!result.views) { %>
+                                        <small class="reads"> <%= "0" + " reads" %> </small>
+                                    <% }else{ %>
+                                        <small class="reads"> <%= result.views + " reads" %> </small>
+                                    <% } %>
+                                    
                                 </div>
                             </div>
                             <% }) %>
