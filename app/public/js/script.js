@@ -63,7 +63,7 @@ if (submitButton) {
 }
 
 const formMonitor = (event, message) => {
-    event.preventDefault();
+    event.preventDefault();2
     const authFailedBanner = document.querySelector('.auth-failed-banner');
     authFailedBanner.firstElementChild.innerHTML =
         'Username must not contain any white spaces!';

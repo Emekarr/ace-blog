@@ -55,6 +55,12 @@ server.get("/post", async (req, res) => {
   res.render("blog", { post });
 });
 
+server.post("/post/comment", authMiddleware, async (req, res) => {
+console.log(req.body)
+  const post = await getAPost(req.query.title);
+  res.redirect("back");
+})
+
 server.get("/admin", adminMiddleWare, (req, res) => {
   res.render("admin");
 });
@@ -79,6 +85,8 @@ server.get("/contact", (req, res) => {
 });
 
 server.post("/contact", (req, res) => {
+  const data = req.body
+
   res.send(req.body);
 });
 

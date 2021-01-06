@@ -1,17 +1,26 @@
 const jwt = require("jsonwebtoken");
+const User = require("../database/models/user");
 
-const authmiddleware = (req, res, next) => {
+const authmiddleware = async (req, res, next) => {
   const cookies = req.cookies;
   const token = cookies.token;
 
   try {
     if (token) {
-        const tokenData = jwt.verify(token, "supersecretkey")
-        const userId = tokenData.id
+      const tokenData = jwt.verify(token, "supersecretkey");
+      const userId = tokenData.id;
+      const user = await User.find({ _id: userId, "tokens.token": token });
+      console.log(user);
+      next()
     } else {
-      new Error()
+      throw new Error();
     }
-  } catch (e) {}
+  } catch (e) {
+    res.render("authresult", {
+      result: " failed becasue you are not loggedin",
+      method: "Attempt to comment",
+    });
+  }
 };
 
 module.exports = authmiddleware;

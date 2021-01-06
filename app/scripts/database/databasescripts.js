@@ -32,7 +32,6 @@ const logInUser = async ({ username, password }) => {
 const createPost = async (postData) => {
   let saved;
   try {
-    console.log(postData.author)
     const post = new Post(postData);
     await post.save();
     saved = true;
@@ -52,10 +51,7 @@ const getPost = async ({ limit, page }) => {
     const startFrom = (page - 1) * limit;
     results = await Post.find().limit(limit).skip(startFrom);
     
-    delete results[0].views
-
-    console.log(results[0].views)
-    
+    delete results[0].views    
   } catch (e) {}
 
   return results;
@@ -76,6 +72,10 @@ const getAPost = async (title) => {
 
   return post;
 };
+
+const saveComment = (comment) => {
+  
+}
 
 module.exports = {
   createUser,
