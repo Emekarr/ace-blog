@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/blog.css" />
+    <link rel="stylesheet" href="./css/pagination.css" />
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/index.css" />
     <link rel="stylesheet" href="/css/nav-style.css" />
@@ -17,9 +19,8 @@
     <%- include("../partials/_header") %>
 
         <main class="main-index">
-            <div class="container-index">
-                    <div class="article-grid">
-                        <% results.forEach(result => { %>
+            <div class="blog-container">
+                <% results.forEach(result => { %>
                             <div class="article">
                                 <h1 class="article-title">
                                     <%= result.title %>
@@ -40,13 +41,25 @@
                                     
                                 </div>
                             </div>
-                            <% }) %>
-                    </div>
+                        <% }) %>
             </div>
         </main>
 
+        <div class="container">
+            <div class="data-container"></div>
+            <div class="pagination-container"></div>
+        </div>
+
+    <%- include("../partials/_pagination") %>
+        
+        <div class="me"></div>
+
+        <script src="./js/script.js"></script>
+        <script src="./js/article.js"></script>
+
         <script src="/js/script.js"></script>
         <script src="/js/article.js"></script>
+        <script src="./js/pagination.js"></script>
 </body>
 
 </html>
