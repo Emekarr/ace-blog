@@ -1,16 +1,16 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose');
 
 const postSchema = mongoose.Schema({
     title: {
-        type : String,
+        type: String,
         required: true,
         trim: true,
-        unique: true
+        unique: true,
     },
     body: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
     },
     views: {
         type: Number,
@@ -19,23 +19,23 @@ const postSchema = mongoose.Schema({
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: "User"
-    }
+        ref: 'User',
+    },
 }, {
-    timestamps: true
-})
+    timestamps: true,
+});
 
 postSchema.methods.toJSON = function() {
-    const postObject = this.toObject()
-    delete postObject.tokens
-    delete postObject.updatedAt
-    delete postObject.owner
-    delete postObject._v
-    delete postObject._id
-    
-    return postObject
-}
+    const postObject = this.toObject();
+    delete postObject.tokens;
+    delete postObject.updatedAt;
+    delete postObject.owner;
+    delete postObject._v;
+    delete postObject._id;
 
-const Post = mongoose.model("Post", postSchema)
+    return postObject;
+};
 
-module.exports = Post
+const Post = mongoose.model('Post', postSchema);
+
+module.exports = Post;

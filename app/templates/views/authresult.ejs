@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/style.css" /> 
+    <link rel="stylesheet" href="./css/formpage.css" />
     <link rel="stylesheet" href="./css/nav-style.css" />
     <script src="https://use.fontawesome.com/36d660b0bd.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -15,20 +16,12 @@
 <body>
     <%- include("../partials/_header") %>
 
-        <main>
+        <main class="main-form">
             <div class="container">
-                <h2 style="font-size: 5rem">
+                <h2 style="font-family: 'Nerko One', cursive; color: var(--dark-blue)">
                     <%= `Your ` + method + result %>
                 </h2>
-                <button class="btn" onclick="location.href='/'" style="
-            background-color: teal;
-            color: white;
-            padding: 2rem;
-            border: 0rem;
-            margin-top: 3rem;
-            outline: none;
-            cursor: pointer;
-          ">
+                <button class="btn" onclick="location.href='/'">
           Go back to home
         </button>
             </div>

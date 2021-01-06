@@ -15,5 +15,5 @@
 }
 
 .show-banner {
-    height: 10vh;
+    display: block;
 }

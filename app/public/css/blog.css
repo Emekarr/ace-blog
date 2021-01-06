@@ -4,17 +4,9 @@
     margin: auto;
 }
 
-.blog {
-    margin-top: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 200px;
-    background: rgb(211, 210, 210);
-}
-
 .main-blog {
     text-align: center;
+    margin-top: 3rem;
 }
 
 .blog-form {

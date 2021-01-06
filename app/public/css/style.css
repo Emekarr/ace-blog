@@ -1,9 +1,8 @@
 body {
     font-family: 'Public Sans', sans-serif;
     font-size: 18px;
-    margin: 0;
+    margin: 0 auto 1rem;
     padding: 0;
-    background: var(--very-light-gray);
 }
 
 
@@ -131,6 +130,8 @@ header {
     left: 0;
     z-index: 1000;
     width: 100%;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
 .header-content {
@@ -192,11 +193,13 @@ header {
     padding: 1rem 0;
     text-align: center;
     border-radius: 5px;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
 .sideNav .sideNav-content li {
     color: var(--dark-blue);
-    padding: 0.5rem 0;
+    padding: 0.7rem 0;
 }
 
 .sideNav .sideNav-content li:hover {
@@ -223,17 +226,13 @@ header {
     margin-top: 2rem;
     transition: all 0.3s ease-in-out;
     text-align: center;
-    background-color: var(--dark-blue);
+    background: var(--dark-blue);
+    color: var(--white);
+    font-family: 'Nerko One', cursive;
     padding: 0.7rem;
     -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 }
-
-.auth-failed-banner p {
-    color: var(--white);
-    font-family: 'Nerko One', cursive;
-}
-
 
 /* 404 */
 
@@ -257,10 +256,26 @@ header {
     color: rgb(219, 7, 7);
 }
 
+.about p{
+    font-size: 0.8rem;
+    font-weight: 100;
+    margin: 1.5rem auto;
+    width: 100%;
+    line-height: 1.5;
+    text-align: justify;
 
+}
 /* Media Queries */
 
 @media screen and (min-width: 700px) {
+    .buttons {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .btn:first-child {
+        margin-right: 0.5rem;
+    }
     .btn {
         padding: 0.7rem 1.5rem;
         border-radius: 50px;

@@ -149,6 +149,10 @@ server.get('/logout', async(req, res) => {
     res.redirect('/');
 });
 
+server.get('/blog', (req, res) => {
+    res.render('blog');
+});
+
 server.get('*', (req, res) => {
     res.status(404);
     res.render('404', { url: req.url });

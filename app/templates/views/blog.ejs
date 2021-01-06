@@ -17,10 +17,6 @@
 <body>
     <%- include("../partials/_header") %>
 
-        <section class="blog">
-            <h1>My Year in Review</h1>
-        </section>
-
         <section class="main-blog">
             <div class="blog-container">
                 <div class="form blog-form">
@@ -47,53 +43,14 @@
                 <form action="/contact" method="POST">
                     <div class="blog-form">
                         <h2>Post a Comment</h2>
-                        <input type="text" name="username" placeholder="Name" required autofocus />
-                        <input type="email" name="email" placeholder="email" required autofocus />
-                        <textarea type="text" name="message" placeholder="message" required autofocus></textarea>
+                        <input type="text" name="username" placeholder="Name" required />
+                        <input type="email" name="email" placeholder="email" required />
+                        <textarea type="text" name="message" placeholder="message" required></textarea>
                         <button type="submit" class="btn">Post Comment</button>
                     </div>
                 </form>
             </div>
         </main>
-
-        <section class="main-blog-form">
-            <div class="blog-container comment-container">
-                <form action="/contact" method="POST">
-                    <h2>Comment</h2>
-                    <div class="blog-form">
-                        <div class="re">
-                            <div class="re-name">
-                                <h4>Emeka Echelon</h4>
-                                <small>Jan 1, 2021 at 3:34 am</small>
-                            </div>
-                            <div class="reply">
-                                <p>reply</p>
-                            </div>
-                        </div>
-                        <div class="message">
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, officia!
-                            </p>
-                        </div>
-                        <hr />
-                        <div class="re">
-                            <div class="re-name">
-                                <h4>Blade Nakamura</h4>
-                                <small>Jan 1, 2021 at 3:44 am</small>
-                            </div>
-                            <div class="reply">
-                                <p>reply</p>
-                            </div>
-                        </div>
-                        <div class="message">
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, officia!
-                            </p>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </section>
         <section>
             <div class="blog-container comment-container">
                 <form action="/contact" method="POST">
