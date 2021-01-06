@@ -25,11 +25,15 @@ const getCookie = (cname) => {
 };
 
 if (getCookie('loggedIn')) {
-    const logIn = document.querySelector('.login');
-    logIn.style.display = 'none';
+    const logIns = document.querySelectorAll('.login');
+    logIns.forEach(logIn => {
+        logIn.style.display = 'none'
+    })
 } else {
-    const logOut = document.querySelector('.logout');
-    logOut.style.display = 'none';
+    const logOuts = document.querySelectorAll('.logout');
+    logOuts.forEach(logOut => {
+        logOut.style.display = 'none'
+    })
 }
 
 const navBarController = (moveIn, moveOut, action1, action2) => {
@@ -59,7 +63,7 @@ if (submitButton) {
 }
 
 const formMonitor = (event, message) => {
-    event.preventDefault();
+    event.preventDefault();2
     const authFailedBanner = document.querySelector('.auth-failed-banner');
     authFailedBanner.firstElementChild.innerHTML =
         'Username must not contain any white spaces!';

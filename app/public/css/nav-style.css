@@ -15,5 +15,5 @@
 }
 
 .show-banner {
-    display: block;
+    visibility: visible;
 }

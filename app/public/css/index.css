@@ -18,16 +18,18 @@
     cursor: pointer;
 }
 
+.article:hover {
+    cursor: pointer;
+}
+
 .article-title {
     font-family: 'Nerko One', cursive;
     font-weight: 300;
 }
 
 .article-snippet {
-    /* height: 100px; */
-    white-space: nowrap;
+    height: 9.5rem;
     overflow: hidden;
-    text-overflow: ellipsis;
     font-size: 0.8rem;
     font-weight: 100;
     margin: 1.5rem auto;

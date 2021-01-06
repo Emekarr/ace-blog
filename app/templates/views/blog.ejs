@@ -1,81 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="./css/blog.css" />
-    <link rel="stylesheet" href="./css/formpage.css" />
-    <link rel="stylesheet" href="./css/nav-style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/blog.css" />
+    <link rel="stylesheet" href="/css/formpage.css" />
+    <link rel="stylesheet" href="/css/nav-style.css" />
     <script src="https://use.fontawesome.com/36d660b0bd.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap"
+      rel="stylesheet"
+    />
     <title>Ace Blog</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <%- include("../partials/_header") %>
 
-        <section class="main-blog">
-            <div class="blog-container">
-                <div class="form blog-form">
-                    <h2>My Year In Review</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus eius at, esse aperiam eligendi totam dolores. Ratione, quod? Ipsa et repudiandae cum expedita dolorem, voluptatum obcaecati enim asperiores. Laboriosam odit obcaecati corrupti eveniet
-                        molestias? Non, sit. Maiores aliquam, quaerat explicabo nisi delectus soluta ipsam laborum accusantium, neque quod vitae consequuntur impedit similique dolorem sequi. Facere ea rem ipsam maiores nesciunt, dolorum eos, accusamus
-                        laborum sapiente rerum autem a excepturi nulla eligendi modi illum at, voluptate aliquam consequuntur fugit sit debitis! Architecto aperiam voluptatem possimus cum odio ea, harum similique incidunt dolor saepe pariatur, ullam molestiae
-                        velit corporis. Rem, aut quos!
-                    </p>
-                    <div class="details">
-                        <div class="det">
-                            <p>Animashaun Taofiq T.</p>
-                        </div>
-                        <div class="det">
-                            <p>January 1, 2021</p>
-                        </div>
-                    </div>
+    <section class="blog">
+      <h1><%= post.title %></h1>
+    </section>
+
+    <section class="main-blog">
+      <div class="blog-container">
+        <div class="form blog-form">
+          <h2><%= post.title %></h2>
+          <p><%= post.body %></p>
+          <div class="details">
+            <div class="det">
+              <p><%= post.author %></p>
+            </div>
+            <div class="det">
+              <% var createdAt = post.createdAt.toString().slice(4, 16) %>
+
+              <small class="time-posted">
+                <%= createdAt.substring(0, 6) + "," + createdAt.substring(6,
+                createdAt.length) %>
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <main class="main-blog-form">
+      <div class="blog-container comment-container">
+        <form action="/post/comment?title= + <%= post.title %>" method="POST">
+          <div class="blog-form">
+            <h2>Post a Comment</h2>
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              required
+            />
+            <textarea
+              type="text"
+              name="message"
+              placeholder="message"
+              required
+            ></textarea>
+            <button type="submit" class="btn">Post Comment</button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <section class="main-blog-form">
+      <div class="blog-container comment-container">
+        <h2>Comment</h2>
+      </div>
+    </section>
+    <section>
+      <div class="blog-container comment-container">
+        <form action="/contact" method="POST">
+          <% post.comments.forEach(comment => { %>
+          <div class="blog-form">
+            <div class="re">
+                <div class="re-name">
+                  <h4> <%= comment.username %> </h4>
+                  <% var createdAt = post.createdAt.toString().slice(4, 25) %>
+
+                
+                  <small><%= createdAt.substring(0, 6) + "," + createdAt.substring(6,
+                    11) + " at" + createdAt.substring(11, createdAt.length) %></small>
                 </div>
+              
+              
             </div>
-        </section>
-        <main class="main-blog-form">
-            <div class="blog-container comment-container">
-                <form action="/contact" method="POST">
-                    <div class="blog-form">
-                        <h2>Post a Comment</h2>
-                        <input type="text" name="username" placeholder="Name" required />
-                        <input type="email" name="email" placeholder="email" required />
-                        <textarea type="text" name="message" placeholder="message" required></textarea>
-                        <button type="submit" class="btn">Post Comment</button>
-                    </div>
-                </form>
+            <div class="message">
+              <p><%=
+                comment.comment
+                %>
+              </p>
             </div>
-        </main>
-        <section>
-            <div class="blog-container comment-container">
-                <form action="/contact" method="POST">
-                    <div class="blog-form">
-                        <div class="re">
-                            <div class="re-name">
-                                <h4>Daniel Meko</h4>
-                                <small>Jan 1, 2021 at 8:34 am</small>
-                            </div>
-                            <div class="reply">
-                                <p>reply</p>
-                            </div>
-                        </div>
-                        <div class="message">
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, officia!
-                            </p>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </section>
+          </div>
+          <% }) %>
+        </form>
+      </div>
+    </section>
 
-        <script src="./js/script.js"></script>
-        <script src="./js/article.js"></script>
-</body>
-
+    <script src="/js/script.js"></script>
+    <script src="/js/article.js"></script>
+  </body>
 </html>
