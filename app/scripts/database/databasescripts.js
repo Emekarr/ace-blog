@@ -1,5 +1,6 @@
 const User = require("./models/user");
 const Post = require("./models/post");
+const Comment = require("./models/comment");
 const bcrypt = require("bcrypt");
 
 const createUser = async (userDetails) => {
@@ -42,7 +43,7 @@ const createPost = async (postData) => {
 
 const getPost = async ({ limit, page }) => {
   let results;
-  
+
   try {
     if (!limit || !page) {
       limit = 7;
@@ -50,8 +51,8 @@ const getPost = async ({ limit, page }) => {
     }
     const startFrom = (page - 1) * limit;
     results = await Post.find().limit(limit).skip(startFrom);
-    
-    delete results[0].views    
+
+    delete results[0].views;
   } catch (e) {}
 
   return results;
@@ -73,9 +74,12 @@ const getAPost = async (title) => {
   return post;
 };
 
-const saveComment = (comment) => {
-  
-}
+const saveComment = (commentData) => {
+  try {
+    const comment = new Comment(commentData);
+    comment.save();
+  } catch (e) {}
+};
 
 module.exports = {
   createUser,
@@ -83,4 +87,5 @@ module.exports = {
   createPost,
   getPost,
   getAPost,
+  saveComment
 };

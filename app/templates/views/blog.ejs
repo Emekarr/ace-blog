@@ -20,8 +20,8 @@
     <%- include("../partials/_header") %>
 
     <section class="blog">
-        <h1><%= post.title %></h1>
-      </section>
+      <h1><%= post.title %></h1>
+    </section>
 
     <section class="main-blog">
       <div class="blog-container">
@@ -33,11 +33,12 @@
               <p><%= post.author %></p>
             </div>
             <div class="det">
-                
-                <% var createdAt = post.createdAt.toString().slice(4, 16) %>
-                                    
-                <small class="time-posted"> <%= createdAt.substring(0, 6) + "," + createdAt.substring(6, createdAt.length)  %>  </small>
-                
+              <% var createdAt = post.createdAt.toString().slice(4, 16) %>
+
+              <small class="time-posted">
+                <%= createdAt.substring(0, 6) + "," + createdAt.substring(6,
+                createdAt.length) %>
+              </small>
             </div>
           </div>
         </div>
@@ -45,13 +46,13 @@
     </section>
     <main class="main-blog-form">
       <div class="blog-container comment-container">
-        <form action="/post/comment" method="POST">
+        <form action="/post/comment?title= + <%= post.title %>" method="POST">
           <div class="blog-form">
             <h2>Post a Comment</h2>
             <input
               type="text"
               name="username"
-              placeholder="Userame"
+              placeholder="Username"
               required
             />
             <textarea
@@ -60,7 +61,7 @@
               placeholder="message"
               required
             ></textarea>
-            <button  type="submit" class="btn">Post Comment</button>
+            <button type="submit" class="btn">Post Comment</button>
           </div>
         </form>
       </div>
@@ -68,64 +69,34 @@
 
     <section class="main-blog-form">
       <div class="blog-container comment-container">
-        <form action="/contact" method="POST">
-          <h2>Comment</h2>
-          <div class="blog-form">
-            <div class="re">
-              <div class="re-name">
-                <h4>Emeka Echelon</h4>
-                <small>Jan 1, 2021 at 3:34 am</small>
-              </div>
-              <div class="reply">
-                <p>reply</p>
-              </div>
-            </div>
-            <div class="message">
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Deleniti, officia!
-              </p>
-            </div>
-            <hr />
-            <div class="re">
-              <div class="re-name">
-                <h4>Blade Nakamura</h4>
-                <small>Jan 1, 2021 at 3:44 am</small>
-              </div>
-              <div class="reply">
-                <p>reply</p>
-              </div>
-            </div>
-            <div class="message">
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Deleniti, officia!
-              </p>
-            </div>
-          </div>
-        </form>
+        <h2>Comment</h2>
       </div>
     </section>
     <section>
       <div class="blog-container comment-container">
         <form action="/contact" method="POST">
+          <% post.comments.forEach(comment => { %>
           <div class="blog-form">
             <div class="re">
-              <div class="re-name">
-                <h4>Daniel Meko</h4>
-                <small>Jan 1, 2021 at 8:34 am</small>
-              </div>
-              <div class="reply">
-                <p>reply</p>
-              </div>
+                <div class="re-name">
+                  <h4> <%= comment.username %> </h4>
+                  <% var createdAt = post.createdAt.toString().slice(4, 25) %>
+
+                
+                  <small><%= createdAt.substring(0, 6) + "," + createdAt.substring(6,
+                    11) + " at" + createdAt.substring(11, createdAt.length) %></small>
+                </div>
+              
+              
             </div>
             <div class="message">
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Deleniti, officia!
+              <p><%=
+                comment.comment
+                %>
               </p>
             </div>
           </div>
+          <% }) %>
         </form>
       </div>
     </section>

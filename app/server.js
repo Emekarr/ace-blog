@@ -8,6 +8,7 @@ const {
   createPost,
   getPost,
   getAPost,
+  saveComment,
 } = require("./scripts/database/databasescripts");
 // helps us use cookies
 const cookieParser = require("cookie-parser");
@@ -52,14 +53,24 @@ server.get("/", async (req, res) => {
 
 server.get("/post", async (req, res) => {
   const post = await getAPost(req.query.title);
+  await post.populate("comments").execPopulate();
+  await post.populate("user").execPopulate()
+  console.log(post.comments)
   res.render("blog", { post });
 });
 
 server.post("/post/comment", authMiddleware, async (req, res) => {
-console.log(req.body)
   const post = await getAPost(req.query.title);
+  const commentData = {
+    user: req.body.userid,
+    comment: req.body.message,
+    username: req.body.username,
+    post: post._id,
+  };
+  saveComment(commentData);
+
   res.redirect("back");
-})
+});
 
 server.get("/admin", adminMiddleWare, (req, res) => {
   res.render("admin");
@@ -85,7 +96,7 @@ server.get("/contact", (req, res) => {
 });
 
 server.post("/contact", (req, res) => {
-  const data = req.body
+  const data = req.body;
 
   res.send(req.body);
 });
@@ -143,20 +154,22 @@ server.get("/logout", async (req, res) => {
   const cookies = req.cookies;
   const cookieToken = cookies.token;
 
-  const tokenData = jwt.verify(cookieToken, "supersecretkey");
-  const userId = tokenData.id;
-  const user = await User.findOne({
-    _id: userId,
-    "tokens.token": cookieToken,
-  });
-
-  user.tokens.forEach((token) => {
-    if (token.token === cookieToken) delete token.token;
-  });
+  try {
+    const tokenData = jwt.verify(cookieToken, "supersecretkey");
+    const userId = tokenData.id;
+    const user = await User.findOne({
+      _id: userId,
+      "tokens.token": cookieToken,
+    });
+    if (!user) throw new Error()
+    user.tokens.forEach((token) => {
+      if (token.token === cookieToken) delete token.token;
+    });
+  } catch (e) {}
 
   res.clearCookie("token");
   res.clearCookie("loggedIn");
-  res.redirect("/");
+  res.redirect("back");
 });
 
 server.get("*", (req, res) => {

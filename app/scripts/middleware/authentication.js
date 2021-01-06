@@ -10,7 +10,8 @@ const authmiddleware = async (req, res, next) => {
       const tokenData = jwt.verify(token, "supersecretkey");
       const userId = tokenData.id;
       const user = await User.find({ _id: userId, "tokens.token": token });
-      console.log(user);
+      if (!user) throw new Error()
+      req.body.userid = userId
       next()
     } else {
       throw new Error();
