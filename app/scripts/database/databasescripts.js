@@ -1,6 +1,7 @@
 const User = require("./models/user");
 const Post = require("./models/post");
 const Comment = require("./models/comment");
+const Feedback = require("./models/feedback");
 const bcrypt = require("bcrypt");
 
 const createUser = async (userDetails) => {
@@ -45,10 +46,6 @@ const getPost = async ({ limit, page }) => {
   let results;
 
   try {
-    if (!limit || !page) {
-      limit = 7;
-      page = 1;
-    }
     const startFrom = (page - 1) * limit;
     results = await Post.find().limit(limit).skip(startFrom);
 
@@ -81,11 +78,23 @@ const saveComment = (commentData) => {
   } catch (e) {}
 };
 
+const saveFeebdback = async (feedback) => {
+  const feedback = new Feedback(feedback);
+  let saved;
+  try {
+    const result = await feedback.save();
+    if (!result) throw new Error();
+    saved = true;
+  } catch (e) {}
+
+  return saved;
+};
+
 module.exports = {
   createUser,
   logInUser,
   createPost,
   getPost,
   getAPost,
-  saveComment
+  saveComment,
 };

@@ -46,16 +46,30 @@ server.set("views", viewsLocation);
 server.use(express.static(staticFilesLocation));
 
 server.get("/", async (req, res) => {
-  const paginateData = { limit: req.body.limit, page: req.body.page };
+  let limit = Number.parseInt(req.query.limit);
+  let page = Number.parseInt(req.query.page);
+
+  if (!limit || !page) {
+    limit = 4;
+    page = 1;
+  }
+
+  const paginateData = {
+    limit,
+    page,
+  };
+
   const results = await getPost(paginateData);
+  results.limit = limit
+  results.page = page+1
   res.render("index", { results });
 });
 
 server.get("/post", async (req, res) => {
   const post = await getAPost(req.query.title);
   await post.populate("comments").execPopulate();
-  await post.populate("user").execPopulate()
-  console.log(post.comments)
+  await post.populate("user").execPopulate();
+  console.log(post.comments);
   res.render("blog", { post });
 });
 
@@ -97,7 +111,6 @@ server.get("/contact", (req, res) => {
 
 server.post("/contact", (req, res) => {
   const data = req.body;
-
   res.send(req.body);
 });
 
@@ -161,7 +174,7 @@ server.get("/logout", async (req, res) => {
       _id: userId,
       "tokens.token": cookieToken,
     });
-    if (!user) throw new Error()
+    if (!user) throw new Error();
     user.tokens.forEach((token) => {
       if (token.token === cookieToken) delete token.token;
     });
@@ -177,5 +190,5 @@ server.get("*", (req, res) => {
   res.render("404", { url: req.url });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 server.listen(PORT);
