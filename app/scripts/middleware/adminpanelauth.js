@@ -7,7 +7,7 @@ const adminAuth = async (req, res, next) => {
 
   try {
     if (!token) throw new Error();
-    const tokenData = jwt.verify(token, process.env.JWTkey);
+    const tokenData = jwt.verify(token, process.env.JWT_KEY);
     const id = tokenData.id;
     const user = await User.findOne({ _id: id, "tokens.token": token });
     if (user === null) throw new Error();

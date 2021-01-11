@@ -23,11 +23,9 @@ const adminMiddleWare = require("./scripts/middleware/adminpanelauth");
 const jwt = require("jsonwebtoken");
 // user model
 const User = require("./scripts/database/models/user");
-//send grid
-const sg = require("@sendgrid/mail");
 
 //connect to a database
-mongoose.connect("mongodb://127.0.0.1/ace-blog-database", {
+mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

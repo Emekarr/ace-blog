@@ -7,7 +7,7 @@ const authmiddleware = async (req, res, next) => {
 
   try {
     if (token) {
-      const tokenData = jwt.verify(token, process.env.JWTkey);
+      const tokenData = jwt.verify(token, process.env.JWT_KEY);
       const userId = tokenData.id;
       const user = await User.find({ _id: userId, "tokens.token": token });
       if (!user) throw new Error()
