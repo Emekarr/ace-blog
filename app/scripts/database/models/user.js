@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
     },
     isAdmin: {
         type: Boolean,
-        default: true,
+        default: false,
     },
     tokens: [{
         token: {
@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
 
 //generate jwt token when called
 userSchema.methods.generateToken = async function() {
-    const token = await jwt.sign({ id: this._id }, 'supersecretkey');
+    const token = await jwt.sign({ id: this._id }, process.env.JWTkey);
     this.tokens.push({ token });
     await this.save();
     return token;

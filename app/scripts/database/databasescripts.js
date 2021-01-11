@@ -3,6 +3,7 @@ const Post = require("./models/post");
 const Comment = require("./models/comment");
 const Feedback = require("./models/feedback");
 const bcrypt = require("bcrypt");
+const sendMail = require("../email/sendgrid");
 
 const createUser = async (userDetails) => {
   let token;
@@ -78,8 +79,8 @@ const saveComment = (commentData) => {
   } catch (e) {}
 };
 
-const saveFeebdback = async (feedback) => {
-  const feedback = new Feedback(feedback);
+const saveFeebdback = async (contact) => {
+  const feedback = new Feedback(contact);
   let saved;
   try {
     const result = await feedback.save();
@@ -90,6 +91,20 @@ const saveFeebdback = async (feedback) => {
   return saved;
 };
 
+const getFeedbacks = async () => {
+  let feedbacks;
+  try {
+    feedbacks = await Feedback.find();
+  } catch (e) {}
+
+  return feedbacks;
+};
+
+const deleteFeedbacks = async (id, message) => {
+  const feedback = await Feedback.findByIdAndDelete(id);
+  sendMail(feedback.email, message);
+};
+
 module.exports = {
   createUser,
   logInUser,
@@ -97,4 +112,7 @@ module.exports = {
   getPost,
   getAPost,
   saveComment,
+  saveFeebdback,
+  getFeedbacks,
+  deleteFeedbacks,
 };

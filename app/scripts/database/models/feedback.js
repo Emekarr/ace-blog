@@ -9,7 +9,7 @@ const feedbackSchema = mongoose.Schema({
   email: {
     type: String,
     validate(value) {
-      const emailRegex = /^[\W-\.]+@([\W-]+\.)+[\W-]{2,4})?$/;
+      const emailRegex = /\S+@\S+\.\S+/;
       if (!value.match(emailRegex)) throw new Error();
     },
     trim: true,

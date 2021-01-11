@@ -9,6 +9,9 @@ const {
   getPost,
   getAPost,
   saveComment,
+  saveFeebdback,
+  getFeedbacks,
+  deleteFeedbacks,
 } = require("./scripts/database/databasescripts");
 // helps us use cookies
 const cookieParser = require("cookie-parser");
@@ -60,8 +63,8 @@ server.get("/", async (req, res) => {
   };
 
   const results = await getPost(paginateData);
-  results.limit = limit
-  results.page = page+1
+  results.limit = limit;
+  results.page = page + 1;
   res.render("index", { results });
 });
 
@@ -69,7 +72,6 @@ server.get("/post", async (req, res) => {
   const post = await getAPost(req.query.title);
   await post.populate("comments").execPopulate();
   await post.populate("user").execPopulate();
-  console.log(post.comments);
   res.render("blog", { post });
 });
 
@@ -86,8 +88,9 @@ server.post("/post/comment", authMiddleware, async (req, res) => {
   res.redirect("back");
 });
 
-server.get("/admin", adminMiddleWare, (req, res) => {
-  res.render("admin");
+server.get("/admin", adminMiddleWare, async (req, res) => {
+  const feedbacks = await getFeedbacks();
+  res.render("admin", { feedbacks });
 });
 
 server.post("/admin", adminMiddleWare, async (req, res) => {
@@ -101,6 +104,12 @@ server.post("/admin", adminMiddleWare, async (req, res) => {
   }
 });
 
+server.post("/sendmail", async (req, res) => {
+  await deleteFeedbacks(req.query.id, req.body.body);
+  const feedbacks = await getFeedbacks()
+  res.render("admin", { feedbacks });
+});
+
 server.get("/about", (req, res) => {
   res.render("about");
 });
@@ -109,9 +118,16 @@ server.get("/contact", (req, res) => {
   res.render("contact");
 });
 
-server.post("/contact", (req, res) => {
+server.post("/contact", async (req, res) => {
   const data = req.body;
-  res.send(req.body);
+
+  const result = await saveFeebdback(data);
+
+  if (result) {
+    res.render("authresult", { result: " was success", method: "feedback" });
+  } else {
+    res.render("authresult", { result: " failed", method: "feedback" });
+  }
 });
 
 server.get("/updates", (req, res) => {
