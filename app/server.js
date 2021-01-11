@@ -25,7 +25,6 @@ const jwt = require("jsonwebtoken");
 const User = require("./scripts/database/models/user");
 
 //connect to a database
-const databaseurl = process.env.MONGODB_URL;
 mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
