@@ -4,7 +4,7 @@
   "description": "blog site",
   "main": "server.js",
   "scripts": {
-    "devStart": "env-cmd -f ./app/config/dev.env nodemon ./app/server.js"
+    "start": "env-cmd -f ./app/config/prod.env nodemon ./app/server.js"
   },
   "author": "Anyanwu-Ebere Chiemekam",
   "license": "ISC",

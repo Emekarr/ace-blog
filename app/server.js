@@ -25,9 +25,11 @@ const jwt = require("jsonwebtoken");
 const User = require("./scripts/database/models/user");
 
 //connect to a database
+const databaseurl = process.env.MONGODB_URL;
 mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useCreateIndex: true,
 });
 
 // location to the views folder
@@ -104,7 +106,7 @@ server.post("/admin", adminMiddleWare, async (req, res) => {
 
 server.post("/sendmail", async (req, res) => {
   await deleteFeedbacks(req.query.id, req.body.body);
-  const feedbacks = await getFeedbacks()
+  const feedbacks = await getFeedbacks();
   res.render("admin", { feedbacks });
 });
 
