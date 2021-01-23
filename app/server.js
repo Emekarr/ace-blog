@@ -5,18 +5,12 @@ const mongoose = require("mongoose");
 const {
   createUser,
   logInUser,
-  createPost,
-  getPost,
-  getAPost,
-  saveComment,
   saveFeebdback,
   getFeedbacks,
   deleteFeedbacks,
 } = require("./scripts/database/databasescripts");
 // helps us use cookies
 const cookieParser = require("cookie-parser");
-//authentication middleware for admin
-const adminMiddleWare = require("./scripts/middleware/adminpanelauth");
 // jsonwebtokem
 const jwt = require("jsonwebtoken");
 // user model
@@ -48,24 +42,11 @@ server.use(express.static(staticFilesLocation));
 //route for the home page
 server.use("/", require("./scripts/routes/homeRoutes"))
 
-//rpute for posts
+//route for posts
 server.use("/post", require("./scripts/routes/postroutes"))
 
-server.get("/admin", adminMiddleWare, async (req, res) => {
-  const feedbacks = await getFeedbacks();
-  res.render("admin", { feedbacks });
-});
-
-server.post("/admin", adminMiddleWare, async (req, res) => {
-  const postData = req.body;
-  const isSaved = await createPost(postData);
-
-  if (isSaved) {
-    res.render("authresult", { result: " succeeded", method: "Post creation" });
-  } else {
-    res.render("authresult", { result: " failed", method: "Post creation" });
-  }
-});
+//route for admin panel
+server.use("/admin", require("./scripts/routes/adminRoute"))
 
 server.post("/sendmail", async (req, res) => {
   await deleteFeedbacks(req.query.id, req.body.body);
@@ -73,9 +54,8 @@ server.post("/sendmail", async (req, res) => {
   res.render("admin", { feedbacks });
 });
 
-server.get("/about", (req, res) => {
-  res.render("about");
-});
+//router for about
+server.use("/about", require("./scripts/routes/aboutRoutes"))
 
 server.get("/contact", (req, res) => {
   res.render("contact");
