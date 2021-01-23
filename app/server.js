@@ -15,8 +15,6 @@ const {
 } = require("./scripts/database/databasescripts");
 // helps us use cookies
 const cookieParser = require("cookie-parser");
-//authentication middleware
-const authMiddleware = require("./scripts/middleware/authentication");
 //authentication middleware for admin
 const adminMiddleWare = require("./scripts/middleware/adminpanelauth");
 // jsonwebtokem
@@ -47,45 +45,11 @@ server.set("views", viewsLocation);
 
 server.use(express.static(staticFilesLocation));
 
-server.get("/", async (req, res) => {
-  let limit = Number.parseInt(req.query.limit);
-  let page = Number.parseInt(req.query.page);
+//route for the home page
+server.use("/", require("./scripts/routes/homeRoutes"))
 
-  if (!limit || !page) {
-    limit = 4;
-    page = 1;
-  }
-
-  const paginateData = {
-    limit,
-    page,
-  };
-
-  const results = await getPost(paginateData);
-  results.limit = limit;
-  results.page = page + 1;
-  res.render("index", { results });
-});
-
-server.get("/post", async (req, res) => {
-  const post = await getAPost(req.query.title);
-  await post.populate("comments").execPopulate();
-  await post.populate("user").execPopulate();
-  res.render("blog", { post });
-});
-
-server.post("/post/comment", authMiddleware, async (req, res) => {
-  const post = await getAPost(req.query.title);
-  const commentData = {
-    user: req.body.userid,
-    comment: req.body.message,
-    username: req.body.username,
-    post: post._id,
-  };
-  saveComment(commentData);
-
-  res.redirect("back");
-});
+//rpute for posts
+server.use("/post", require("./scripts/routes/postroutes"))
 
 server.get("/admin", adminMiddleWare, async (req, res) => {
   const feedbacks = await getFeedbacks();
