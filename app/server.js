@@ -48,6 +48,9 @@ server.use("/post", require("./scripts/routes/postroutes"))
 //route for admin panel
 server.use("/admin", require("./scripts/routes/adminRoute"))
 
+//route for contact
+server.use("/contact", require("./scripts/routes/contactRoute"))
+
 server.post("/sendmail", async (req, res) => {
   await deleteFeedbacks(req.query.id, req.body.body);
   const feedbacks = await getFeedbacks();
@@ -57,28 +60,7 @@ server.post("/sendmail", async (req, res) => {
 //router for about
 server.use("/about", require("./scripts/routes/aboutRoutes"))
 
-server.get("/contact", (req, res) => {
-  res.render("contact");
-});
-
-server.post("/contact", async (req, res) => {
-  const data = req.body;
-
-  const result = await saveFeebdback(data);
-
-  if (result) {
-    res.render("authresult", { result: " was success", method: "feedback" });
-  } else {
-    res.render("authresult", { result: " failed", method: "feedback" });
-  }
-});
-
-server.get("/updates", (req, res) => {
-  res.render("authresult", {
-    result: " failed because this page is undone.",
-    method: " attempt to get this page has",
-  });
-});
+server.use("/updates", require("./scripts/routes/updatesRoutes"))
 
 server.get("/about", (req, res) => {
   res.render("authresult", {
