@@ -3,9 +3,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 // these functions perform database operations
 const {
-  createUser,
   logInUser,
-  saveFeebdback,
   getFeedbacks,
   deleteFeedbacks,
 } = require("./scripts/database/databasescripts");
@@ -62,47 +60,9 @@ server.use("/about", require("./scripts/routes/aboutRoutes"))
 
 server.use("/updates", require("./scripts/routes/updatesRoutes"))
 
-server.get("/about", (req, res) => {
-  res.render("authresult", {
-    result: " failed because this page is undone.",
-    method: " attempt to get this page has",
-  });
-});
+server.use("/login", require("./scripts/routes/loginRoute"))
 
-server.get("/login", (req, res) => {
-  res.render("login");
-});
-
-server.post("/login", async (req, res) => {
-  const token = await logInUser(req.body);
-  if (token) {
-    res.cookie("token", token, { httpOnly: true });
-    res.cookie("loggedIn", true);
-    res.redirect("/");
-  } else {
-    res.render("authresult", { result: " failed", method: "Login" });
-  }
-});
-
-server.get("/signup", (req, res) => {
-  res.render("signup");
-});
-
-server.post("/signup", async (req, res) => {
-  const userDetails = req.body;
-  const token = await createUser(userDetails);
-
-  if (token) {
-    res.cookie("token", token, { httpOnly: true });
-    res.cookie("loggedIn", true);
-    res.render("authresult", {
-      result: "was successful!",
-      method: "registration ",
-    });
-  } else {
-    res.render("authresult", { result: "failed!", method: "registration " });
-  }
-});
+server.use("/signup", require("./scripts/routes/signUpRoute"))
 
 server.get("/logout", async (req, res) => {
   const cookies = req.cookies;
