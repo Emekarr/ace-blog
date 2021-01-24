@@ -1,6 +1,6 @@
 const sg = require("@sendgrid/mail");
 
-const api = process.env.API_KEY
+const api = process.env.API_KEY;
 
 sg.setApiKey(api);
 
@@ -12,7 +12,9 @@ const sendMail = (feedbackMail, message) => {
     text: message,
   };
 
-  sg.send(msg);
+  try {
+    sg.send(msg);
+  } catch {}
 };
 
-module.exports = sendMail
+module.exports = sendMail;

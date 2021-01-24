@@ -102,7 +102,9 @@ const getFeedbacks = async () => {
 
 const deleteFeedbacks = async (id, message) => {
   const feedback = await Feedback.findByIdAndDelete(id);
-  sendMail(feedback.email, message);
+  try {
+    sendMail(feedback.email, message);
+  } catch {}
 };
 
 module.exports = {

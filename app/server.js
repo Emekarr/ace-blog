@@ -1,18 +1,9 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
-// these functions perform database operations
-const {
-  logInUser,
-  getFeedbacks,
-  deleteFeedbacks,
-} = require("./scripts/database/databasescripts");
+
 // helps us use cookies
 const cookieParser = require("cookie-parser");
-// jsonwebtokem
-const jwt = require("jsonwebtoken");
-// user model
-const User = require("./scripts/database/models/user");
 
 //connect to a database
 mongoose.connect(process.env.MONGODB_URL, {
@@ -49,42 +40,23 @@ server.use("/admin", require("./scripts/routes/adminRoute"))
 //route for contact
 server.use("/contact", require("./scripts/routes/contactRoute"))
 
-server.post("/sendmail", async (req, res) => {
-  await deleteFeedbacks(req.query.id, req.body.body);
-  const feedbacks = await getFeedbacks();
-  res.render("admin", { feedbacks });
-});
+//route to send email to people who give feedback
+server.use("/sendmail", require("./scripts/routes/sendMailRoute"))
 
 //router for about
 server.use("/about", require("./scripts/routes/aboutRoutes"))
 
+//route to update page
 server.use("/updates", require("./scripts/routes/updatesRoutes"))
 
+//route to sign in to aceblog
 server.use("/login", require("./scripts/routes/loginRoute"))
 
+//route to sign up to aceblog
 server.use("/signup", require("./scripts/routes/signUpRoute"))
 
-server.get("/logout", async (req, res) => {
-  const cookies = req.cookies;
-  const cookieToken = cookies.token;
-
-  try {
-    const tokenData = jwt.verify(cookieToken, "supersecretkey");
-    const userId = tokenData.id;
-    const user = await User.findOne({
-      _id: userId,
-      "tokens.token": cookieToken,
-    });
-    if (!user) throw new Error();
-    user.tokens.forEach((token) => {
-      if (token.token === cookieToken) delete token.token;
-    });
-  } catch (e) {}
-
-  res.clearCookie("token");
-  res.clearCookie("loggedIn");
-  res.redirect("back");
-});
+//route to logout
+server.use("/logout", require("./scripts/routes/logout"))
 
 server.get("*", (req, res) => {
   res.status(404);
