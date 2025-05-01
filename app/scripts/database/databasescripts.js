@@ -2,13 +2,13 @@ const User = require("./models/user");
 const Post = require("./models/post");
 const bcrypt = require("bcrypt");
 
-const createUser = async (userDetails => {
+const createUser = async (userDetails, t) => {
   let token;
 
   try {
     const user = new User(userDetails);
     const savedUser = await user.save();
-    token = savedUser.generateToken();
+    token = t;
   } catch (e) {}
 
   return token;
