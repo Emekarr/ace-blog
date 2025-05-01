@@ -1,12 +1,6 @@
 const mongoose = require("mongoose")
 
 const postSchema = mongoose.Schema({
-    title: {
-        type : String,
-        required: true,
-        trim: true,
-        unique: true
-    },
     body: {
         type: String,
         required: true,
