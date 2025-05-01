@@ -2,7 +2,7 @@ const User = require("./models/user");
 const Post = require("./models/post");
 const bcrypt = require("bcrypt");
 
-const createUser = async (userDetails) => {
+const createUser = async (userDetails => {
   let token;
 
   try {
