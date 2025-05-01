@@ -4,7 +4,7 @@ const api = process.env.API_KEY;
 
 sg.setApiKey(api);
 
-const sendMail = (feedbackMail) => {
+const sendMail = (feedbackMail => {
   const msg = {
     to: feedbackMail,
     from: "aceanyanwu02@gmail.com",
